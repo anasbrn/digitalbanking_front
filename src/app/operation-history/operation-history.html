@@ -1,0 +1,73 @@
+<div class="container mt-4 p-4 border rounded bg-white shadow-sm" style="max-width: 800px;">
+
+  <!-- 🔹 Bank Account Info -->
+  <div class="mb-4">
+    <h4 class="mb-3 text-primary">Bank Account Info</h4>
+    <ul class="list-group">
+      <li class="list-group-item">
+        <strong>Customer Name:</strong> {{ customerName }}
+      </li>
+      <li class="list-group-item">
+        <strong>Account ID:</strong> {{ bankAccountId }}
+      </li>
+      <li class="list-group-item">
+        <strong>Balance:</strong> {{ balance }}
+      </li>
+    </ul>
+  </div>
+
+  <!-- 🔹 Operations Table -->
+  <div>
+    <h5 class="mb-3 text-secondary">Transaction History</h5>
+
+    <table class="table table-bordered table-striped table-sm">
+      <thead class="table-light">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Date</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Type</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let op of operationDTOs">
+        <td>{{ op.id }}</td>
+        <td>{{ op.date }}</td>
+        <td>{{ op.amount }}</td>
+        <td>
+            <span class="badge" [ngClass]="{
+              'bg-success': op.type === 'CREDIT',
+              'bg-danger': op.type === 'DEBIT',
+              'bg-primary': op.type === 'TRANSFER'
+            }">
+              {{ op.type }}
+            </span>
+        </td>
+      </tr>
+      <tr *ngIf="operationDTOs.length === 0">
+        <td colspan="4" class="text-center text-muted">No operations available.</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <!-- 🔹 Pagination -->
+    <nav *ngIf="totalPages > 1">
+      <ul class="pagination justify-content-center">
+        <li class="page-item" [class.disabled]="currentPage === 0">
+          <button class="page-link" (click)="goToPage(currentPage - 1)">Previous</button>
+        </li>
+
+        <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index"
+            [class.active]="i === currentPage">
+          <button class="page-link" (click)="goToPage(i)">
+            {{ i + 1 }}
+          </button>
+        </li>
+
+        <li class="page-item" [class.disabled]="currentPage >= totalPages - 1">
+          <button class="page-link" (click)="goToPage(currentPage + 1)">Next</button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>

@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
-import {Customers} from '../customers/customers';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NgClass} from '@angular/common';
 

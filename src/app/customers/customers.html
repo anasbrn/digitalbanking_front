@@ -17,9 +17,12 @@
           <th scope="row">{{ customer.id }}</th>
           <td>{{ customer.name }}</td>
           <td>{{ customer.email }}</td>
-          <td>
-            <button class="btn btn-outline-secondary me-2" [routerLink]="['/customers/edit', customer.id]" ><i class="bi bi-pen"></i></button>
+          <td class="d-flex gap-2">
+            <button class="btn btn-outline-secondary" [routerLink]="['/customers/edit', customer.id]" ><i class="bi bi-pen"></i></button>
             <button (click)="deleteCustomer(customer.id)" class="btn btn-outline-danger"><i class="bi bi-trash"></i>
+            </button>
+            <button [routerLink]="['/bankAccounts/customer', customer.id]" class="btn btn-primary">
+              Accounts
             </button>
           </td>
         </tr>
