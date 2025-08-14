@@ -42,6 +42,8 @@ export class AuthService {
     const token = window.localStorage.getItem("access-token");
     if (token) {
       this.router.navigateByUrl("/");
+    } else {
+      this.router.navigateByUrl("/login");
     }
   }
 }
