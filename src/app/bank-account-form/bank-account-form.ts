@@ -32,7 +32,7 @@ export class BankAccountForm implements OnInit {
       currency: ['', Validators.required],
       type: ['sa', Validators.required],
       interestRate: [null],
-      overdraft: [null]
+      overDraft: [null]
     });
 
     this.loadCustomers();
@@ -49,21 +49,21 @@ export class BankAccountForm implements OnInit {
   setupTypeListener(): void {
     this.form.get('type')?.valueChanges.subscribe((type) => {
       const interestRate = this.form.get('interestRate');
-      const overdraft = this.form.get('overdraft');
+      const overDraft = this.form.get('overDraft');
 
       interestRate?.clearValidators();
-      overdraft?.clearValidators();
+      overDraft?.clearValidators();
 
       if (type === 'sa') {
         interestRate?.setValidators([Validators.required, Validators.min(0)]);
-        overdraft?.patchValue(null);
+        overDraft?.patchValue(null);
       } else if (type === 'ca') {
-        overdraft?.setValidators([Validators.required, Validators.min(0)]);
+        overDraft?.setValidators([Validators.required, Validators.min(0)]);
         interestRate?.patchValue(null);
       }
 
       interestRate?.updateValueAndValidity();
-      overdraft?.updateValueAndValidity();
+      overDraft?.updateValueAndValidity();
     console.log('Account type changed:', type);
     });
 
@@ -75,13 +75,13 @@ export class BankAccountForm implements OnInit {
 
       // Remove unused field from payload
       if (formData.type === 'sa') {
-        delete formData.overdraft;
+        delete formData.overDraft;
       } else if (formData.type === 'ca') {
         delete formData.interestRate;
       }
 
       this.http.post(`${this.baseUrl}/bankAccounts/save`, formData).subscribe({
-        next: () => this.router.navigate(['/customers']),
+        next: () => this.router.navigate(['/bankAccounts']),
         error: (err) => console.error('Failed to create bank account:', err)
       });
     }

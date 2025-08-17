@@ -60,8 +60,8 @@
     <!-- Overdraft (only if type is ca) -->
     <div class="mb-3" *ngIf="form.get('type')?.value === 'ca'">
       <label class="form-label">Overdraft</label>
-      <input type="number" class="form-control" formControlName="overdraft">
-      <div *ngIf="form.get('overdraft')?.invalid && form.get('overdraft')?.touched" class="text-danger">
+      <input type="number" class="form-control" formControlName="overDraft">
+      <div *ngIf="form.get('overDraft')?.invalid && form.get('overDraft')?.touched" class="text-danger">
         Overdraft is required and must be >= 0.
       </div>
     </div>

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BankAccountInfos } from './bank-account-infos';
+import { CustomerBankAccountInfos } from './customer-bank-account-infos';
 
-describe('BankAccountInfos', () => {
-  let component: BankAccountInfos;
-  let fixture: ComponentFixture<BankAccountInfos>;
+describe('CustomerBankAccountInfos', () => {
+  let component: CustomerBankAccountInfos;
+  let fixture: ComponentFixture<CustomerBankAccountInfos>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BankAccountInfos]
+      imports: [CustomerBankAccountInfos]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(BankAccountInfos);
+    fixture = TestBed.createComponent(CustomerBankAccountInfos);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

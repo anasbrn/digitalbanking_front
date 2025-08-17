@@ -11,12 +11,13 @@ import {CurrencyPipe, DatePipe, NgForOf} from '@angular/common';
     CurrencyPipe,
     RouterLink
   ],
-  templateUrl: './bank-account-infos.html',
-  styleUrl: './bank-account-infos.css'
+  templateUrl: './customer-bank-account-infos.html',
+  styleUrl: './customer-bank-account-infos.css'
 })
-export class BankAccountInfos implements OnInit {
+export class CustomerBankAccountInfos implements OnInit {
   bankAccounts?: any ;
   customerId?: String | null;
+  customer?: any;
   errorMessage?: string;
 
   private baseUrl = 'http://localhost:8085/bankAccounts'; // replace with your API
@@ -38,8 +39,11 @@ export class BankAccountInfos implements OnInit {
   }
 
   fetchBankAccounts(): void {
-    this.http.get(`${this.baseUrl}/customer/${this.customerId}`).subscribe({
-      next: (data) => (this.bankAccounts = data),
+    this.http.get<any[]>(`${this.baseUrl}/customer/${this.customerId}`).subscribe({
+      next: (data) => {
+        this.bankAccounts = data;
+        this.customer = data[0].customer;
+      },
       error: (err) => {
         console.error('Error fetching bank account:', err);
         this.errorMessage = 'Failed to load bank account data.';

@@ -1,0 +1,51 @@
+<div class="container mt-4">
+
+  <!-- 🔹 Customer Info -->
+  <div class="mb-4 p-3 bg-light border rounded">
+    <h5 class="mb-2 text-primary">Customer Information</h5>
+    <p><strong>Customer Id:</strong> {{ customerId || 'N/A' }}</p>
+        <p><strong>Name:</strong> {{ customer?.name || 'N/A' }}</p>
+        <p><strong>Email:</strong> {{ customer?.email || 'N/A' }}</p>
+  </div>
+
+  <h5 class="text-secondary mb-3">Bank Accounts</h5>
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover table-striped">
+      <thead class="table-light">
+      <tr>
+        <th>Account ID</th>
+        <th>Created At</th>
+        <th>Balance</th>
+        <th>Currency</th>
+        <th>Type</th>
+        <th>Status</th>
+        <th>Over Draft</th>
+        <th>Interest Rate</th>
+        <th>Operations History</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let account of bankAccounts">
+        <td>{{ account.id }}</td>
+        <td>{{ account.createdAt | date: 'medium' }}</td>
+        <td>{{ account.balance | currency: account.currency }}</td>
+        <td>{{ account.currency }}</td>
+        <td>{{ account.type }}</td>
+        <td>{{ account.status }}</td>
+        <td>{{ account.overDraft || 'N/A' }}</td>
+        <td>{{ account.interestRate || 'N/A' }}</td>
+        <td class="text-center">
+          <button [routerLink]="['/bankAccounts/', account.id, 'operations', 'history']"
+                  class="btn bg-transparent text-primary fw-bold">
+            View
+          </button>
+        </td>
+      </tr>
+
+      <tr *ngIf="bankAccounts.length === 0">
+        <td colspan="6" class="text-center text-muted">No bank accounts found.</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
