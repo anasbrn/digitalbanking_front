@@ -1,7 +1,10 @@
 <div class="container mt-4">
-  <div class="d-flex justify-content-end">
-    <button class="btn btn-outline-info m-3" routerLink="/bankAccounts/add">
+  <div class="d-flex justify-content-end gap-2">
+    <button class="btn btn-outline-info" routerLink="/bankAccounts/add">
       New Account <i class="bi bi-plus"></i>
+    </button>
+    <button class="btn btn-outline-info" routerLink="/operations/add">
+      New Operation <i class="bi bi-plus"></i>
     </button>
   </div>
   <h5 class="text-secondary mb-3">Bank Accounts</h5>
@@ -40,7 +43,7 @@
         </td>
       </tr>
 
-      <tr *ngIf="bankAccounts.length === 0">
+      <tr *ngIf="bankAccounts?.length === 0">
         <td colspan="6" class="text-center text-muted">No bank accounts found.</td>
       </tr>
       </tbody>

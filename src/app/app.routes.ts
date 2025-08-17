@@ -6,6 +6,7 @@ import {OperationHistory} from './operation-history/operation-history';
 import {CustomerBankAccountInfos} from './customer-bank-account-infos/customer-bank-account-infos';
 import {BankAccountForm} from './bank-account-form/bank-account-form';
 import {BankAccounts} from './bank-accounts/bank-accounts';
+import {AddOperation} from './add-operation/add-operation';
 
 export const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -16,4 +17,5 @@ export const routes: Routes = [
   {path: 'bankAccounts', component: BankAccounts},
   {path: 'bankAccounts/customer/:id', component: CustomerBankAccountInfos},
   {path: 'bankAccounts/add', component: BankAccountForm},
+  {path: 'operations/add', component: AddOperation},
 ];

@@ -1,0 +1,64 @@
+<div class="container mt-4 p-4 bg-white border rounded shadow-sm" style="max-width: 600px;">
+  <h4 class="text-primary mb-4">Add Operation</h4>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label class="form-label">Select Bank Account</label>
+      <select class="form-select" formControlName="bankAccountId">
+        <option value="">-- Choose BankAccount --</option>
+        <option *ngFor="let bankAccount of bankAccounts" [value]="bankAccount.id">
+          {{ bankAccount.id }} ({{ bankAccount?.customer?.name }}) ({{ bankAccount.type }})
+        </option>
+      </select>
+      <div *ngIf="form.get('bankAccountId')?.invalid && form.get('bankAccountId')?.touched" class="text-danger">
+        Bank Account is required.
+      </div>
+    </div>
+
+    <!-- Operation Type -->
+    <div class="mb-3">
+      <label class="form-label">Operation Type</label>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" value="credit" formControlName="type" id="type-credit">
+        <label class="form-check-label" for="type-credit">CREDIT</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" value="withdraw" formControlName="type" id="type-withdraw">
+        <label class="form-check-label" for="type-withdraw">WITHDRAW</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" value="transfer" formControlName="type" id="type-transfer">
+        <label class="form-check-label" for="type-transfer">TRANSFER</label>
+      </div>
+    </div>
+
+    <!-- Recipient if operation type is TRANSFER -->
+    <div class="mb-3" *ngIf="form.get('type')?.value === 'transfer'">
+      <div class="mb-3">
+        <label class="form-label">Select Recipient Bank Account</label>
+        <select class="form-select" formControlName="recipientBankAccountId">
+          <option value="">-- Choose BankAccount --</option>
+          <option *ngFor="let recipientBankAccount of bankAccounts" [value]="recipientBankAccount.id">
+            {{ recipientBankAccount.id }} ({{ recipientBankAccount?.customer?.name }}) ({{ recipientBankAccount.type }})
+          </option>
+        </select>
+        <div *ngIf="form.get('recipientBankAccountId')?.invalid && form.get('recipientBankAccountId')?.touched"
+             class="text-danger">
+          Recipient Bank Account is required.
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Amount</label>
+      <input type="number" class="form-control" formControlName="amount">
+      <div *ngIf="form.get('amount')?.invalid && form.get('amount')?.touched" class="text-danger">
+        Amount is required and must be >= 0.
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+      Create Operation
+    </button>
+  </form>
+</div>
