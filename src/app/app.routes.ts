@@ -4,6 +4,7 @@ import {Customers} from './customers/customers';
 import {CustomerForm} from './customer-form/customer-form.component';
 import {OperationHistory} from './operation-history/operation-history';
 import {BankAccountInfos} from './bank-account-infos/bank-account-infos';
+import {BankAccountForm} from './bank-account-form/bank-account-form';
 
 export const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -12,4 +13,5 @@ export const routes: Routes = [
   {path: 'customers/edit/:id', component: CustomerForm},
   {path: 'bankAccounts/:id/operations/history', component: OperationHistory},
   {path: 'bankAccounts/customer/:id', component: BankAccountInfos},
+  {path: 'bankAccounts/add', component: BankAccountForm},
 ];

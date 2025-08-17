@@ -4,11 +4,10 @@
   <div class="mb-4 p-3 bg-light border rounded">
     <h5 class="mb-2 text-primary">Customer Information</h5>
     <p><strong>Customer Id:</strong> {{ customerId || 'N/A' }}</p>
-<!--    <p><strong>Name:</strong> {{ customer?.email || 'N/A' }}</p>-->
-<!--    <p><strong>Email:</strong> {{ customer?.email || 'N/A' }}</p>-->
+    <!--    <p><strong>Name:</strong> {{ customer?.email || 'N/A' }}</p>-->
+    <!--    <p><strong>Email:</strong> {{ customer?.email || 'N/A' }}</p>-->
   </div>
 
-  <!-- 🔹 Bank Accounts Table -->
   <h5 class="text-secondary mb-3">Bank Accounts</h5>
   <div class="table-responsive">
     <table class="table table-bordered table-hover table-striped">
@@ -32,7 +31,8 @@
         <td>{{ account.type }}</td>
         <td>{{ account.status }}</td>
         <td class="text-center">
-          <button [routerLink]="['/bankAccounts/', account.id, 'operations', 'history']" class="btn bg-transparent text-primary fw-bold">
+          <button [routerLink]="['/bankAccounts/', account.id, 'operations', 'history']"
+                  class="btn bg-transparent text-primary fw-bold">
             View
           </button>
         </td>

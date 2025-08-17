@@ -1,0 +1,73 @@
+<div class="container mt-4 p-4 bg-white border rounded shadow-sm" style="max-width: 600px;">
+  <h4 class="text-primary mb-4">Add Bank Account</h4>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <!-- Customer -->
+    <div class="mb-3">
+      <label class="form-label">Select Customer</label>
+      <select class="form-select" formControlName="customerId">
+        <option value="">-- Choose Customer --</option>
+        <option *ngFor="let customer of customers" [value]="customer.id">
+          {{ customer.name }} ({{ customer.email }})
+        </option>
+      </select>
+      <div *ngIf="form.get('customerId')?.invalid && form.get('customerId')?.touched" class="text-danger">
+        Customer is required.
+      </div>
+    </div>
+
+    <!-- Balance -->
+    <div class="mb-3">
+      <label class="form-label">Balance</label>
+      <input type="number" class="form-control" formControlName="balance">
+      <div *ngIf="form.get('balance')?.invalid && form.get('balance')?.touched" class="text-danger">
+        Balance is required and must be >= 0.
+      </div>
+    </div>
+
+    <!-- Currency -->
+    <div class="mb-3">
+      <label class="form-label">Currency</label>
+      <input type="text" class="form-control" formControlName="currency">
+      <div *ngIf="form.get('currency')?.invalid && form.get('currency')?.touched" class="text-danger">
+        Currency is required.
+      </div>
+    </div>
+
+    <!-- Type -->
+    <div class="mb-3">
+      <label class="form-label">Account Type</label>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" value="sa" formControlName="type" id="type-sa">
+        <label class="form-check-label" for="type-sa">Saving Account</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" value="ca" formControlName="type" id="type-ca">
+        <label class="form-check-label" for="type-ca">Current Account</label>
+      </div>
+    </div>
+
+    <!-- Interest Rate (only if type is sa) -->
+    <div class="mb-3" *ngIf="form.get('type')?.value === 'sa'">
+      <label class="form-label">Interest Rate</label>
+      <input type="number" class="form-control" formControlName="interestRate">
+      <div *ngIf="form.get('interestRate')?.invalid && form.get('interestRate')?.touched" class="text-danger">
+        Interest rate is required and must be >= 0.
+      </div>
+    </div>
+
+    <!-- Overdraft (only if type is ca) -->
+    <div class="mb-3" *ngIf="form.get('type')?.value === 'ca'">
+      <label class="form-label">Overdraft</label>
+      <input type="number" class="form-control" formControlName="overdraft">
+      <div *ngIf="form.get('overdraft')?.invalid && form.get('overdraft')?.touched" class="text-danger">
+        Overdraft is required and must be >= 0.
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+      Create Bank Account
+    </button>
+  </form>
+</div>
